@@ -9,7 +9,7 @@ npm i expressions-parser
 
 How to use:
 ```typescript
-import {toAST, parseInput, apply} from 'expression-parser';
+import {toAST, parseInput, apply} from 'expressions-parser';
 
 const ast = toAST(parseInput('1 + 1'));
 apply(ast, {}); // return 2
@@ -30,7 +30,7 @@ Allowed are:
 You can use pipes the same way as in angular:
 
 ```typescript
-import {toAST, parseInput, apply} from 'expression-parser';
+import {toAST, parseInput, apply} from 'expressions-parser';
 const ast = toAST(parseInput('obj.numbers | min:10 | sum'));
 const sum = apply(ast, {
     obj: {
