@@ -1,7 +1,7 @@
 {
   "name": "expressions-parser",
   "version": "1.0.0",
-  "description": "Parses expressions and evals them",
+  "description": "Parses expressions and evaluate them",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,6 +13,12 @@
     "build:ts": "tsc",
     "build": "npm run build:ts"
   },
+  "keywords": [
+    "expressions parser",
+    "evaluate",
+    "abstract syntax tree",
+    "angular pipe"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/papirosko/expressions-parser.git"
