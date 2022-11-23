@@ -1,0 +1,9 @@
+.idea
+coverage
+.eslintrc.js
+test
+jest.config.ts
+junit.xml
+package-lock.json
+tsconfig.json
+tsconfig-eslint.json

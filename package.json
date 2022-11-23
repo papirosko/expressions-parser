@@ -1,0 +1,45 @@
+{
+  "name": "expressions-parser",
+  "version": "1.0.0",
+  "description": "Parses expressions and evals them",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
+    "prebuild": "npm run lint && npm run clean && npm run test",
+    "test": "jest",
+    "gen:expression": "cd src && rimraf generated && antlr4ts -o generated -visitor Expressions.g4 && cd ..",
+    "build:ts": "tsc",
+    "build": "npm run build:ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/papirosko/expressions-parser.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/papirosko/expressions-parser/issues"
+  },
+  "homepage": "https://github.com/papirosko/expressions-parser#readme",
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.4",
+    "scats": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
+    "antlr4ts-cli": "^0.5.0-alpha.4",
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6",
+    "jest-junit": "^12.2.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.3",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.9.3"
+  }
+}
