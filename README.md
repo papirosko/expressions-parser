@@ -2,6 +2,12 @@
 
 `expressions-parser` allows you to parse expression from string and evaluate it.
 
+Install:
+```
+npm i expressions-parser
+```
+
+How to use:
 ```typescript
 import {toAST, parseInput, apply} from 'expression-parser';
 
