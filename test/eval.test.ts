@@ -191,6 +191,18 @@ describe('apply', () => {
         })).toBeTruthy();
     });
 
+    test('equal operators', () => {
+        expect(apply(toAST(parseInput('1 == 1')), {})).toBeTruthy();
+        expect(apply(toAST(parseInput('1 != 1')), {})).toBeFalsy();
+        expect(apply(toAST(parseInput('1 == 2')), {})).toBeFalsy();
+        expect(apply(toAST(parseInput('1 != 2')), {})).toBeTruthy();
+
+        expect(apply(toAST(parseInput('"aa" == "aa"')), {})).toBeTruthy();
+        expect(apply(toAST(parseInput('"aa" != "aa"')), {})).toBeFalsy();
+        expect(apply(toAST(parseInput('"ab" == "ac"')), {})).toBeFalsy();
+        expect(apply(toAST(parseInput('"ab" != "ac"')), {})).toBeTruthy();
+    });
+
     test('injection', () => {
         let x = 0;
 
