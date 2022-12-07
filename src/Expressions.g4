@@ -9,7 +9,7 @@ methodArg: (pipe | path | STRING | NUMBER);
 methodArgs: methodArg (',' methodArg)*;
 methodCall: FIELD '(' methodArgs? ')';
 pipeName: FIELD;
-pipeArg: ':' (value | methodCall | path);
+pipeArg: ':' (value | methodCall | path | '(' pipe ')');
 pipe: path ('|' pipeName pipeArg*)+;
 
 expression: '(' expression ')'

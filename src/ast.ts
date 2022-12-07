@@ -135,7 +135,15 @@ function convertNode(node: ParseTree): ExpressionNode {
     } else if (node instanceof MethodCallContext) {
         return convertMethodCall(node);
     } else if (node instanceof PipeArgContext) {
-        return convertNode(node.getChild(1));
+        const children = Collection.from(option(node.children).getOrElseValue([]));
+        if (children.size == 2) { // `:arg`, `:"string"`, `:123`
+            return convertNode(node.getChild(1));
+        } else if (children.size == 4) { // `:(another_pipe)`
+            return convertNode(node.getChild(2));
+        } else {
+            throw new Error('Unrecognized pipe argument: ' + node.text);
+        }
+
     } else if (node instanceof PathContext) {
         return convertPathNode(node);
     } else {

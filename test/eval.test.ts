@@ -143,6 +143,39 @@ describe('apply', () => {
             }
         })).toEqual(0.9);
     });
+    test('method with pipe with another pipe as pipe arg', () => {
+        expect(apply(toAST(parseInput('images | filter:"score":"gte":(images | map:"score" | avg) | size')), {
+            images: Collection.of({
+                category: 'A',
+                score: 0.8
+            }, {
+                category: 'B',
+                score: 0.9
+            }, {
+                category: 'C',
+                score: 1
+            }),
+        }, {
+            functions: {
+                collection: (...args) => Collection.of(...args),
+                max: (col: Collection<number>) => col.maxBy(identity)
+            },
+            pipes: {
+                filter: (col: Collection<number>, field: string, op: string, value: number) => {
+                    return col.filter(x => {
+                        if (op === 'gte') {
+                            return x[field] >= value;
+                        } else {
+                            return false;
+                        }
+                    });
+                },
+                map: (col: Collection<number>, field: string) => col.map(x => x[field]),
+                avg: (col: Collection<number>) => col.nonEmpty ? col.sum(identity) / col.size : 0,
+                size: (col: Collection<any>) => col.size
+            }
+        })).toEqual(2);
+    });
 
     test('silently process undefined', () => {
 
