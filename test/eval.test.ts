@@ -10,6 +10,19 @@ describe('apply', () => {
         expect(apply(toAST(parseInput('a + 2')), { a: 2 })).toEqual(4);
     });
 
+    test('logical operators', () => {
+        const ctx = {
+            a: 1,
+            b: 1,
+            c: 1
+        };
+        expect(apply(toAST(parseInput('(a == 1) && ((b == 1) || (c == 1))')), ctx)).toEqual(true);
+        expect(apply(toAST(parseInput('a == 2 && ((b == 1) || (c == 1))')), ctx)).toEqual(false);
+        expect(apply(toAST(parseInput('a == 1 && ((b == 1) || (c == 2))')), ctx)).toEqual(true);
+        expect(apply(toAST(parseInput('a == 1 && ((b == 2) || (c == 1))')), ctx)).toEqual(true);
+        expect(apply(toAST(parseInput('a == 1 && ((b == 2) || (c == 2))')), ctx)).toEqual(false);
+    });
+
     test('property access', () => {
         expect(apply(toAST(parseInput('col.size > 0')), {
             col: {
