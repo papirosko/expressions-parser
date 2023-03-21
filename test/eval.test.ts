@@ -224,6 +224,28 @@ describe('apply', () => {
 
     });
 
+
+    test('or operator with method call', () => {
+        const ctx1 = {
+            form: {
+                field: "Allow all"
+            }
+        };
+        const ctx2 = {
+            form: {
+                field: "Nothing"
+            }
+        };
+
+        expect(apply(toAST(parseInput('form.field == "Allow all" || form.field.includes("Movie")')), ctx1)).toBeTruthy();
+        expect(apply(toAST(parseInput('form.field == "Allow all" || form.field.includes("Movie")')), ctx2)).toBeFalsy();
+        expect(apply(toAST(parseInput('form.field == "Allow all" || form.field.includes("Nothing")')), ctx2)).toBeTruthy();
+        expect(apply(toAST(parseInput('form.field == "Allow all" || form.field.includes("Nothing")')), {}, {
+            undefinedFields: 'return-undefined'
+        })).toBeFalsy();
+
+    });
+
     test('boolean operators', () => {
         expect(apply(toAST(parseInput('1 < 2 && 3 < 4')), {})).toBeTruthy();
         expect(apply(toAST(parseInput('1 > 2 && 3 < 4')), {})).toBeFalsy();
