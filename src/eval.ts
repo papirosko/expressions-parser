@@ -156,6 +156,10 @@ function applyImpl(expr: ExpressionNode, ctx: any, rootContext: any, params: Exe
                 return v1 >= v2;
             case '<=':
                 return v1 <= v2;
+            case '==':
+                return v1 == v2;
+            case '!=':
+                return v1 != v2;
         }
     } else if (expr.tpe === ExpressionsParser.OPERATOR2) {
         const v1 = applyImpl(expr.children[0], ctx, rootContext, params);
@@ -174,10 +178,6 @@ function applyImpl(expr: ExpressionNode, ctx: any, rootContext: any, params: Exe
                 return v1 && v2;
             case '||':
                 return v1 || v2;
-            case '==':
-                return v1 == v2;
-            case '!=':
-                return v1 != v2;
         }
     } else if (expr.tpe === ExpressionsParser.FIELD) {
         return followPath(ctx, rootContext, expr.value as string, params);

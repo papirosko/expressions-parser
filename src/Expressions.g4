@@ -23,9 +23,9 @@ expression: '(' expression ')'
             ;
 
 WS: [ \t\u000C\r\n]+ -> skip;
-OPERATOR1: '>=' | '<=' | [><+-];
+OPERATOR1: '>=' | '<=' | [><+-] | '==' || '!=';
 OPERATOR2: [*/];
-OPERATOR3: '&&' | '||' | '==' || '!=';
+OPERATOR3: '&&' | '||';
 BOOL: 'true' | 'false';
 STRING: ('"' ~('"')* '"') | ('\'' ~('\'')* '\'');
 NUMBER: '-'? [0-9]+ ('.'? [0-9]+)?;
